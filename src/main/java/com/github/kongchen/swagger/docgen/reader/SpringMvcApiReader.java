@@ -61,7 +61,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
 
     @Override
     protected void updateExtensionChain() {
-        List<SwaggerExtension> extensions = new ArrayList<SwaggerExtension>();
+        List<SwaggerExtension> extensions = new ArrayList<>();
         extensions.add(new SpringSwaggerExtension(LOG));
         SwaggerExtensions.setExtensions(extensions);
     }
@@ -85,9 +85,9 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
             swagger = new Swagger();
         }
         List<Method> methods = resource.getMethods();
-        Map<String, Tag> tags = new HashMap<String, Tag>();
+        Map<String, Tag> tags = new HashMap<>();
 
-        List<SecurityRequirement> resourceSecurities = new ArrayList<SecurityRequirement>();
+        List<SecurityRequirement> resourceSecurities = new ArrayList<>();
 
         // Add the description from the controller api
         Class<?> controller = resource.getControllerClass();
@@ -125,7 +125,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
                     continue;
                 }
 
-                Map<String, String> regexMap = new HashMap<String, String>();
+                Map<String, String> regexMap = new HashMap<>();
                 String operationPath = parseOperationPath(path, regexMap);
 
                 //http method
@@ -133,7 +133,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
                     String httpMethod = requestMethod.toString().toLowerCase();
                     Operation operation = parseMethod(method, requestMethod);
 
-                    updateOperationParameters(new ArrayList<Parameter>(), regexMap, operation);
+                    updateOperationParameters(new ArrayList<>(), regexMap, operation);
 
                     updateOperationProtocols(apiOperation, operation);
 
@@ -161,8 +161,8 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
 
         RequestMapping requestMapping = findMergedAnnotation(method, RequestMapping.class);
         Type responseClass = null;
-        List<String> produces = new ArrayList<String>();
-        List<String> consumes = new ArrayList<String>();
+        List<String> produces = new ArrayList<>();
+        List<String> consumes = new ArrayList<>();
         String responseContainer = null;
         String operationId = getOperationId(method, requestMethod.name());
         Map<String, Property> defaultResponseHeaders = null;
@@ -348,7 +348,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
     }
 
     private Map<String, List<Method>> collectApisByRequestMapping(List<Method> methods) {
-        Map<String, List<Method>> apiMethodMap = new HashMap<String, List<Method>>();
+        Map<String, List<Method>> apiMethodMap = new HashMap<>();
         for (Method method : methods) {
             RequestMapping requestMapping = findMergedAnnotation(method, RequestMapping.class);
             if (requestMapping != null) {
@@ -361,7 +361,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
                 if (apiMethodMap.containsKey(path)) {
                     apiMethodMap.get(path).add(method);
                 } else {
-                    List<Method> ms = new ArrayList<Method>();
+                    List<Method> ms = new ArrayList<>();
                     ms.add(method);
                     apiMethodMap.put(path, ms);
                 }
@@ -439,14 +439,14 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
     }
 
     protected Map<String, SpringResource> generateResourceMap(Set<Class<?>> validClasses) throws GenerateException {
-        Map<String, SpringResource> resourceMap = new HashMap<String, SpringResource>();
+        Map<String, SpringResource> resourceMap = new HashMap<>();
         for (Class<?> aClass : validClasses) {
             RequestMapping requestMapping = findAnnotation(aClass, RequestMapping.class);
             //This try/catch block is to stop a bamboo build from failing due to NoClassDefFoundError
             //This occurs when a class or method loaded by reflections contains a type that has no dependency
             try {
                 resourceMap = analyzeController(aClass, resourceMap, "");
-                List<Method> mList = new ArrayList<Method>(Arrays.asList(aClass.getMethods()));
+                List<Method> mList = new ArrayList<>(Arrays.asList(aClass.getMethods()));
                 if (aClass.getSuperclass() != null) {
                     mList.addAll(Arrays.asList(aClass.getSuperclass().getMethods()));
                 }

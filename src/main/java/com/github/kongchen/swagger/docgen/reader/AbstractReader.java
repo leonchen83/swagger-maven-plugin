@@ -120,7 +120,7 @@ public abstract class AbstractReader {
     }
 
     /**
-     * Method which allows sub-classes to modify the Swagger extension chain.
+     * Method which allows subclasses to modify the Swagger extension chain.
      */
     protected void updateExtensionChain() {
         // default implementation does nothing
@@ -579,11 +579,11 @@ public abstract class AbstractReader {
         TypeExtracter extractor = new TypeExtracter();
         Collection<TypeWithAnnotations> typesWithAnnotations = extractor.extractTypes(cls);
 
-        List<Parameter> output = new ArrayList<Parameter>();
+        List<Parameter> output = new ArrayList<>();
         for (TypeWithAnnotations typeWithAnnotations : typesWithAnnotations) {
 
             Type type = typeWithAnnotations.getType();
-            List<Annotation> annotations = new ArrayList<Annotation>(additionalAnnotations);
+            List<Annotation> annotations = new ArrayList<>(additionalAnnotations);
             annotations.addAll(typeWithAnnotations.getAnnotations());
 
             /*

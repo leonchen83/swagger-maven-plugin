@@ -2,6 +2,7 @@ package com.github.kongchen.swagger.docgen;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -84,13 +85,13 @@ public class Utils {
 
         //reorder definitions
         if (swagger.getDefinitions() != null) {
-            TreeMap<String, Model> defs = new TreeMap<String, Model>(swagger.getDefinitions());
+            TreeMap<String, Model> defs = new TreeMap<>(swagger.getDefinitions());
             swagger.setDefinitions(defs);
         }
 
         // order the tags
         if (swagger.getTags() != null) {
-            swagger.getTags().sort((a, b) -> a.toString().toLowerCase().compareTo(b.toString().toLowerCase()));
+            swagger.getTags().sort(Comparator.comparing(a -> a.toString().toLowerCase()));
         }
 
     }

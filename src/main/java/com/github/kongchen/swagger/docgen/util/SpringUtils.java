@@ -18,7 +18,7 @@ public class SpringUtils {
     public static String[] getControllerResquestMapping(Class<?> controllerClazz) {
         String[] controllerRequestMappingValues = {};
 
-        // Determine if we will use class-level requestmapping or dummy string
+        // Determine if we will use class-level request mapping or dummy string
         RequestMapping classRequestMapping = AnnotationUtils.findAnnotation(controllerClazz, RequestMapping.class);
         if (classRequestMapping != null) {
             controllerRequestMappingValues = classRequestMapping.value();

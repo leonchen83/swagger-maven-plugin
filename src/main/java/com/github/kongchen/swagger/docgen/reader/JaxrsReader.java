@@ -310,7 +310,7 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             if (apiOperation != null && !apiOperation.response().equals(Void.class) && !apiOperation.response().equals(void.class)) {
                 responseClass = apiOperation.response();
             }
-            LOGGER.debug("handling sub-resource method " + method.toString() + " -> " + responseClass);
+            LOGGER.debug("handling sub-resource method " + method + " -> " + responseClass);
             read(responseClass, operationPath, httpMethod, true, apiConsumes, apiProduces, tags, operation.getParameters());
         }
     }

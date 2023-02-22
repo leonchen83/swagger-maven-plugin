@@ -384,31 +384,25 @@ public abstract class AbstractDocumentSource<D extends AbstractReader & ClassSwa
     }
 
     private void initHandlebars(Handlebars handlebars) {
-        handlebars.registerHelper("ifeq", new Helper<String>() {
-            @Override
-            public CharSequence apply(String value, Options options) throws IOException {
-                if (value == null || options.param(0) == null) {
-                    return options.inverse();
-                }
-                if (value.equals(options.param(0))) {
-                    return options.fn();
-                }
+        handlebars.registerHelper("ifeq", (Helper<String>) (value, options) -> {
+            if (value == null || options.param(0) == null) {
                 return options.inverse();
             }
+            if (value.equals(options.param(0))) {
+                return options.fn();
+            }
+            return options.inverse();
         });
 
-        handlebars.registerHelper("basename", new Helper<String>() {
-            @Override
-            public CharSequence apply(String value, Options options) throws IOException {
-                if (value == null) {
-                    return null;
-                }
-                int lastSlash = value.lastIndexOf("/");
-                if (lastSlash == -1) {
-                    return value;
-                } else {
-                    return value.substring(lastSlash + 1);
-                }
+        handlebars.registerHelper("basename", (Helper<String>) (value, options) -> {
+            if (value == null) {
+                return null;
+            }
+            int lastSlash = value.lastIndexOf("/");
+            if (lastSlash == -1) {
+                return value;
+            } else {
+                return value.substring(lastSlash + 1);
             }
         });
 

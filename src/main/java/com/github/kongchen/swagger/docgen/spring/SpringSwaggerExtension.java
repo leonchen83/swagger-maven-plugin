@@ -265,7 +265,7 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
             return Collections.emptyList();
         }
 
-        List<Parameter> parameters = new ArrayList<Parameter>();
+        List<Parameter> parameters = new ArrayList<>();
         Class<?> clazz = TypeUtils.getRawType(type, type);
         for (PropertyDescriptor propertyDescriptor : BeanUtils.getPropertyDescriptors(clazz)) {
             // Get all the valid setter methods inside the bean
@@ -335,7 +335,7 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
     // Class specificly for holding default value annotations
     private static class AnnotationBearer {
         /**
-         * Only used to get annotations..
+         * Only used to get annotations
          *
          * @param requestParam ignore this
          */

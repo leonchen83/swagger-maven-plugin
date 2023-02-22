@@ -42,8 +42,7 @@ public class JaxrsParameterExtension extends AbstractSwaggerExtension {
 
         ClassToInstanceMap<Annotation> annotationMap = toMap(annotations);
 
-        List<Parameter> parameters = new ArrayList<>();
-        parameters.addAll(extractParametersFromAnnotation(type, annotationMap));
+        List<Parameter> parameters = new ArrayList<>(extractParametersFromAnnotation(type, annotationMap));
 
         if (!parameters.isEmpty()) {
             return parameters;
