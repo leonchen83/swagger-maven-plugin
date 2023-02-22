@@ -10,7 +10,7 @@ import io.swagger.models.Swagger;
 import io.swagger.servlet.Reader;
 
 /**
- * A dedicated {@link ClassSwaggerReader} to scan Serlet classes.
+ * A dedicated {@link ClassSwaggerReader} to scan Servlet classes.
  */
 public class ServletReader extends AbstractReader implements ClassSwaggerReader {
 
