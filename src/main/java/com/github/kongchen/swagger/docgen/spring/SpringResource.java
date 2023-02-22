@@ -20,8 +20,7 @@ public class SpringResource {
     private String description;
 
     /**
-     *
-     * @param clazz        Controller class
+     * @param clazz Controller class
      * @param resourceName resource Name
      * @param resourceKey key containing the controller package, class controller class name, and controller-level @RequestMapping#value
      * @param description description of the contrroller
@@ -31,7 +30,7 @@ public class SpringResource {
         this.resourceName = resourceName;
         this.resourceKey = resourceKey;
         this.description = description;
-        methods = new ArrayList<Method>();
+        methods = new ArrayList<>();
 
         String[] controllerRequestMappingValues = SpringUtils.getControllerResquestMapping(controllerClass);
 

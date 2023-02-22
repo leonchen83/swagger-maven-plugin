@@ -61,6 +61,40 @@ public class PetData {
                 "url1", "url2"}, new String[]{"tag3", "tag4"}, "available"));
     }
 
+    static Pet createPet(long id, Category cat, String name, String[] urls,
+                         String[] tags, String status) {
+        Pet pet = new Pet();
+        pet.setId(new PetId(id));
+        pet.setCategory(cat);
+        pet.setName(new PetName(name));
+        if (urls != null) {
+            List<String> urlObjs = new ArrayList<String>();
+            Collections.addAll(urlObjs, urls);
+            pet.setPhotoUrls(urlObjs);
+        }
+        List<Tag> tagObjs = new ArrayList<Tag>();
+        int i = 0;
+        if (tags != null) {
+            for (String tagString : tags) {
+                i = i + 1;
+                Tag tag = new Tag();
+                tag.setId(i);
+                tag.setName(tagString);
+                tagObjs.add(tag);
+            }
+        }
+        pet.setTags(tagObjs);
+        pet.setStatus(status);
+        return pet;
+    }
+
+    static Category createCategory(long id, String name) {
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+        return category;
+    }
+
     public Pet getPetbyId(long petId) {
         for (Pet pet : pets) {
             if (pet.getId().value() == petId) {
@@ -111,9 +145,9 @@ public class PetData {
         return result;
     }
 
-	public List<Pet> findAllPets() {
-		return Collections.unmodifiableList(pets);
-	}
+    public List<Pet> findAllPets() {
+        return Collections.unmodifiableList(pets);
+    }
 
     public Pet addPet(Pet pet) {
         if (pet.getId().value() == 0) {
@@ -134,39 +168,5 @@ public class PetData {
         }
         pets.add(pet);
         return pet;
-    }
-
-    static Pet createPet(long id, Category cat, String name, String[] urls,
-                         String[] tags, String status) {
-        Pet pet = new Pet();
-        pet.setId(new PetId(id));
-        pet.setCategory(cat);
-        pet.setName(new PetName(name));
-        if (urls != null) {
-            List<String> urlObjs = new ArrayList<String>();
-            Collections.addAll(urlObjs, urls);
-            pet.setPhotoUrls(urlObjs);
-        }
-        List<Tag> tagObjs = new ArrayList<Tag>();
-        int i = 0;
-        if (tags != null) {
-            for (String tagString : tags) {
-                i = i + 1;
-                Tag tag = new Tag();
-                tag.setId(i);
-                tag.setName(tagString);
-                tagObjs.add(tag);
-            }
-        }
-        pet.setTags(tagObjs);
-        pet.setStatus(status);
-        return pet;
-    }
-
-    static Category createCategory(long id, String name) {
-        Category category = new Category();
-        category.setId(id);
-        category.setName(name);
-        return category;
     }
 }

@@ -15,12 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.ws.rs.BeanParam;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
-
 import org.apache.commons.lang3.reflect.TypeUtils;
 import org.apache.commons.lang3.text.StrBuilder;
 import org.apache.maven.plugin.logging.Log;
@@ -72,24 +66,34 @@ import io.swagger.models.properties.Property;
 import io.swagger.models.properties.RefProperty;
 import io.swagger.util.ParameterProcessor;
 import io.swagger.util.PathUtils;
+import jakarta.ws.rs.BeanParam;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 
 /**
  * @author chekong on 15/4/28.
  */
 public abstract class AbstractReader {
-    private static final ResponseContainerConverter RESPONSE_CONTAINER_CONVERTER = new ResponseContainerConverter();
-    protected final Log LOG;
-    protected Swagger swagger;
-    private Set<Type> typesToSkip = new HashSet<Type>();
-    protected List<ResponseMessageOverride> responseMessageOverrides;
-
-    protected String operationIdFormat;
-
     /**
      * Supported parameters: {{packageName}}, {{className}}, {{methodName}}, {{httpMethod}}
      * Suggested default value is: "{{className}}_{{methodName}}_{{httpMethod}}"
      */
     public static final String OPERATION_ID_FORMAT_DEFAULT = "{{methodName}}";
+    private static final ResponseContainerConverter RESPONSE_CONTAINER_CONVERTER = new ResponseContainerConverter();
+    protected final Log LOG;
+    protected Swagger swagger;
+    protected List<ResponseMessageOverride> responseMessageOverrides;
+
+    protected String operationIdFormat;
+    private Set<Type> typesToSkip = new HashSet<>();
+
+    public AbstractReader(Swagger swagger, Log LOG) {
+        this.swagger = swagger;
+        this.LOG = LOG;
+        updateExtensionChain();
+    }
 
     public Set<Type> getTypesToSkip() {
         return typesToSkip;
@@ -107,18 +111,12 @@ public abstract class AbstractReader {
         this.typesToSkip.add(type);
     }
 
-    public void setResponseMessageOverrides(List<ResponseMessageOverride> responseMessageOverrides) {
-        this.responseMessageOverrides = responseMessageOverrides;
-    }
-
     public List<ResponseMessageOverride> getResponseMessageOverrides() {
         return responseMessageOverrides;
     }
 
-    public AbstractReader(Swagger swagger, Log LOG) {
-        this.swagger = swagger;
-        this.LOG = LOG;
-        updateExtensionChain();
+    public void setResponseMessageOverrides(List<ResponseMessageOverride> responseMessageOverrides) {
+        this.responseMessageOverrides = responseMessageOverrides;
     }
 
     /**
@@ -490,7 +488,7 @@ public abstract class AbstractReader {
             if (operation.getProduces() != null) {
                 both.addAll(operation.getProduces());
             }
-            apiProduces = both.toArray(new String[both.size()]);
+            apiProduces = both.toArray(new String[0]);
         }
         return apiProduces;
     }
@@ -502,7 +500,7 @@ public abstract class AbstractReader {
             if (operation.getConsumes() != null) {
                 both.addAll(operation.getConsumes());
             }
-            apiConsumes = both.toArray(new String[both.size()]);
+            apiConsumes = both.toArray(new String[0]);
         }
         return apiConsumes;
     }
@@ -525,13 +523,7 @@ public abstract class AbstractReader {
             Parameter p = readImplicitParam(param, cls);
             if (p != null) {
                 if (p instanceof BodyParameter) {
-                    Iterator<Parameter> iterator = operation.getParameters().iterator();
-                    while (iterator.hasNext()) {
-                        Parameter parameter = iterator.next();
-                        if (parameter instanceof BodyParameter) {
-                            iterator.remove();
-                        }
-                    }
+                    operation.getParameters().removeIf(parameter -> parameter instanceof BodyParameter);
                 }
                 operation.addParameter(p);
             }

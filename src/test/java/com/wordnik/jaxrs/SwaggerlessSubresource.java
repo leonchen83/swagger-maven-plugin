@@ -1,11 +1,11 @@
 package com.wordnik.jaxrs;
 
+import com.wordnik.sample.model.Pet;
+import com.wordnik.sample.model.PetName;
+
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-
-import com.wordnik.sample.model.Pet;
-import com.wordnik.sample.model.PetName;
 
 public class SwaggerlessSubresource {
 

@@ -22,7 +22,7 @@ public class SecurityDefinitionTest {
         SecuritySchemeDefinition api_key = definitions.get("api_key");
         Assert.assertNotNull(api_key);
         Assert.assertTrue(api_key instanceof ApiKeyAuthDefinition);
-        Assert.assertEquals(((ApiKeyAuthDefinition)api_key).getName(), "api_key_name");
+        Assert.assertEquals(((ApiKeyAuthDefinition) api_key).getName(), "api_key_name");
 
         // No name is set for this auth
         // The name should be set to the name of the definition
@@ -30,7 +30,7 @@ public class SecurityDefinitionTest {
         SecuritySchemeDefinition api_key_empty_name = definitions.get("api_key_empty_name");
         Assert.assertNotNull(api_key_empty_name);
         Assert.assertTrue(api_key_empty_name instanceof ApiKeyAuthDefinition);
-        Assert.assertEquals(((ApiKeyAuthDefinition)api_key_empty_name).getName(), "api_key_empty_name");
+        Assert.assertEquals(((ApiKeyAuthDefinition) api_key_empty_name).getName(), "api_key_empty_name");
 
 
         SecuritySchemeDefinition petstore_auth = definitions.get("petstore_auth");

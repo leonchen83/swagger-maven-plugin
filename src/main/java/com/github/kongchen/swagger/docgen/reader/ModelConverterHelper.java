@@ -11,7 +11,6 @@ import io.swagger.converter.ModelConverter;
 import io.swagger.jackson.AbstractModelConverter;
 
 /**
- *
  * @author andrewbird
  */
 public class ModelConverterHelper extends AbstractModelConverter implements ModelConverter {

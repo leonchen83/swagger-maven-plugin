@@ -9,17 +9,11 @@ public class UpdatePetRequest {
     private String name;
     private String status;
 
+    public UpdatePetRequest() {
+    }
+
     public String getName() {
         return name;
-    }
-
-    @ApiParam(value = "ID of pet that needs to be updated", required = true)
-    public void setPetId(@PathVariable("petId") String petId) {
-        this.petId = petId;
-    }
-
-    public String getStatus() {
-        return status;
     }
 
     @ApiParam(value = "Updated name of the pet", required = false)
@@ -27,8 +21,8 @@ public class UpdatePetRequest {
         this.name = name;
     }
 
-    public String getPetId() {
-        return petId;
+    public String getStatus() {
+        return status;
     }
 
     @ApiParam(value = "Updated status of the pet", required = false)
@@ -36,7 +30,13 @@ public class UpdatePetRequest {
         this.status = status;
     }
 
-    public UpdatePetRequest() {
+    public String getPetId() {
+        return petId;
+    }
+
+    @ApiParam(value = "ID of pet that needs to be updated", required = true)
+    public void setPetId(@PathVariable("petId") String petId) {
+        this.petId = petId;
     }
 
 

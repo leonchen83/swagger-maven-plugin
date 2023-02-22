@@ -18,20 +18,6 @@ package com.wordnik.jaxrs;
 
 import java.util.List;
 
-import jakarta.ws.rs.BeanParam;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
 import com.sun.jersey.api.core.InjectParam;
 import com.wordnik.sample.JavaRestResourceUtil;
 import com.wordnik.sample.TestVendorExtension;
@@ -50,6 +36,19 @@ import io.swagger.annotations.Authorization;
 import io.swagger.annotations.AuthorizationScope;
 import io.swagger.annotations.Extension;
 import io.swagger.annotations.ExtensionProperty;
+import jakarta.ws.rs.BeanParam;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/pet")
 @Api(value = "/pet", description = "Operations about pets", authorizations = {
@@ -83,6 +82,7 @@ public class PetResource {
             throw new com.wordnik.sample.exception.NotFoundException(404, "Pet not found");
         }
     }
+
     //contrived example test case for swagger-maven-plugin issue #304
     @GET
     @Path("/{startId : [0-9]{1,2}}:{endId : [0-9]{1,2}}")
@@ -183,18 +183,18 @@ public class PetResource {
         return Response.ok(petData.findPetByTags(tags)).build();
     }
 
-	@GET
-	@Path("/findAll")
-	@ApiOperation(value = "Finds all Pets", notes = "Returns a paginated list of all the Pets.")
-	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid page number value") })
-	public PagedList<Pet> findAllPaginated(
-			@ApiParam(value = "pageNumber", required = true) @QueryParam("pageNumber") int pageNumber) {
-		List<Pet> allPets = petData.findAllPets();
-		int pageSize = 5;
-		int startIndex = (pageNumber - 1) * pageSize;
-		int endIndex = startIndex + pageSize;
-		return new PagedList<Pet>(pageNumber, allPets.size(), allPets.subList(startIndex, endIndex));
-	}
+    @GET
+    @Path("/findAll")
+    @ApiOperation(value = "Finds all Pets", notes = "Returns a paginated list of all the Pets.")
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Invalid page number value")})
+    public PagedList<Pet> findAllPaginated(
+            @ApiParam(value = "pageNumber", required = true) @QueryParam("pageNumber") int pageNumber) {
+        List<Pet> allPets = petData.findAllPets();
+        int pageSize = 5;
+        int startIndex = (pageNumber - 1) * pageSize;
+        int endIndex = startIndex + pageSize;
+        return new PagedList<Pet>(pageNumber, allPets.size(), allPets.subList(startIndex, endIndex));
+    }
 
     @POST
     @Path("/{petId}")

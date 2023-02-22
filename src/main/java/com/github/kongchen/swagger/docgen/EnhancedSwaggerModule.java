@@ -1,8 +1,11 @@
 package com.github.kongchen.swagger.docgen;
 
+import java.io.Serial;
+
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class EnhancedSwaggerModule extends SimpleModule {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     public EnhancedSwaggerModule() {

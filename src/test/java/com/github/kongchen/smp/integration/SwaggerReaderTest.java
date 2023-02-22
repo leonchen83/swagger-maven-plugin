@@ -29,13 +29,13 @@ public class SwaggerReaderTest extends AbstractMojoTestCase {
     private ObjectMapper mapper = Json.mapper();
 
     @Override
-	@BeforeMethod
+    @BeforeMethod
     protected void setUp() throws Exception {
         super.setUp();
 
         try {
             FileUtils.deleteDirectory(swaggerOutputDir);
-        } catch(Exception e) {
+        } catch (Exception e) {
             //ignore
         }
 

@@ -24,6 +24,7 @@ import io.swagger.util.Json;
  * @author chekong on 15/5/5.
  */
 public class SecurityDefinition {
+    private final ObjectMapper mapper = Json.mapper();
     private String name;
     private String type;
     private String in;
@@ -31,12 +32,10 @@ public class SecurityDefinition {
     private String json;
     private String jsonPath;
 
-    private ObjectMapper mapper = Json.mapper();
-
     public Map<String, SecuritySchemeDefinition> generateSecuritySchemeDefinitions() throws GenerateException {
-        Map<String, SecuritySchemeDefinition> map = new HashMap<String, SecuritySchemeDefinition>();
+        Map<String, SecuritySchemeDefinition> map = new HashMap<>();
 
-        Map<String, JsonNode> securityDefinitions = new HashMap<String, JsonNode>();
+        Map<String, JsonNode> securityDefinitions = new HashMap<>();
         if (json != null || jsonPath != null) {
             securityDefinitions = loadSecurityDefintionsFromJsonFile();
         } else {
@@ -88,7 +87,7 @@ public class SecurityDefinition {
             InputStream jsonStream = json != null ? this.getClass().getResourceAsStream(json) : new FileInputStream(jsonPath);
             JsonNode tree = mapper.readTree(jsonStream);
             Iterator<Map.Entry<String, JsonNode>> fields = tree.fields();
-            while(fields.hasNext()) {
+            while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
                 JsonNode securityDefinition = field.getValue();
 

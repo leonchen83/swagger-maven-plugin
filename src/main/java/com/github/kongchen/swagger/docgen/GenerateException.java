@@ -1,11 +1,14 @@
 package com.github.kongchen.swagger.docgen;
 
+import java.io.Serial;
+
 /**
  * @author chekong
- *         05/29/2013
+ * 05/29/2013
  */
 public class GenerateException extends Exception {
 
+    @Serial
     private static final long serialVersionUID = -1641016437077276797L;
 
     public GenerateException(String errorMessage, Throwable cause) {

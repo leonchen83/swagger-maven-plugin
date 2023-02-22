@@ -7,9 +7,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.QueryParam;
-
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.testng.annotations.Test;
 
@@ -19,6 +16,8 @@ import com.google.common.collect.Sets;
 import io.swagger.jaxrs.ext.SwaggerExtension;
 import io.swagger.models.parameters.AbstractSerializableParameter;
 import io.swagger.models.parameters.Parameter;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
 
 public class JaxrsParameterExtensionTest {
     @Test
@@ -53,7 +52,7 @@ public class JaxrsParameterExtensionTest {
         assertEquals(parameters.size(), 1);
 
         Parameter extracted = parameters.get(0);
-        assertEquals(((AbstractSerializableParameter)extracted).getDefaultValue(), "en-US");
+        assertEquals(((AbstractSerializableParameter) extracted).getDefaultValue(), "en-US");
     }
 
     private static class SomeResource {

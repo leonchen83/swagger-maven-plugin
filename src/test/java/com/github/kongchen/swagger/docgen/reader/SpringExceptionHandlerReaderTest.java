@@ -35,6 +35,15 @@ public class SpringExceptionHandlerReaderTest {
 
     private SpringExceptionHandlerReader exceptionHandlerReader;
 
+    private static Matcher<ResponseStatus> withValue(Matcher<HttpStatus> submatcher) {
+        return new FeatureMatcher<ResponseStatus, HttpStatus>(submatcher, "", "") {
+            @Override
+            protected HttpStatus featureValueOf(ResponseStatus responseStatus) {
+                return responseStatus.value();
+            }
+        };
+    }
+
     @BeforeMethod
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -94,14 +103,5 @@ public class SpringExceptionHandlerReaderTest {
 
     @ResponseStatus(OK)
     class OverridenInHandlerException extends Exception {
-    }
-
-    private static Matcher<ResponseStatus> withValue(Matcher<HttpStatus> submatcher) {
-        return new FeatureMatcher<ResponseStatus, HttpStatus>(submatcher, "", "") {
-            @Override
-            protected HttpStatus featureValueOf(ResponseStatus responseStatus) {
-                return responseStatus.value();
-            }
-        };
     }
 }

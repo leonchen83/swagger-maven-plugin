@@ -14,7 +14,7 @@ import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
 
 /**
  * @author Igor Gursky
- *         15.12.2015.
+ * 15.12.2015.
  */
 public class TestUtils {
 

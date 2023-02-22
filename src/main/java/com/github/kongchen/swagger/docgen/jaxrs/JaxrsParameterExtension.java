@@ -8,13 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.ws.rs.CookieParam;
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
@@ -29,6 +22,12 @@ import io.swagger.models.parameters.Parameter;
 import io.swagger.models.parameters.PathParameter;
 import io.swagger.models.parameters.QueryParameter;
 import io.swagger.models.properties.Property;
+import jakarta.ws.rs.CookieParam;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 
 /**
  * @author chekong on 15/5/12.
@@ -38,12 +37,12 @@ public class JaxrsParameterExtension extends AbstractSwaggerExtension {
     @Override
     public List<Parameter> extractParameters(List<Annotation> annotations, Type type, Set<Type> typesToSkip, Iterator<SwaggerExtension> chain) {
         if (this.shouldIgnoreType(type, typesToSkip)) {
-            return new ArrayList<Parameter>();
+            return new ArrayList<>();
         }
 
         ClassToInstanceMap<Annotation> annotationMap = toMap(annotations);
 
-        List<Parameter> parameters = new ArrayList<Parameter>();
+        List<Parameter> parameters = new ArrayList<>();
         parameters.addAll(extractParametersFromAnnotation(type, annotationMap));
 
         if (!parameters.isEmpty()) {

@@ -18,16 +18,6 @@ package com.wordnik.jaxrs;
 
 import java.util.List;
 
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
-
 import com.google.common.collect.Lists;
 import com.wordnik.sample.JavaRestResourceUtil;
 import com.wordnik.sample.data.StoreData;
@@ -39,6 +29,15 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("/store")
 @Api(value = "/store")
@@ -71,8 +70,8 @@ public class PetStoreResource {
     @ApiOperation(value = "Find multiple purchase orders by IDs",
             notes = "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
             responseContainer = "List", response = Order.class)
-    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-            @ApiResponse(code = 404, message = "Order not found") })
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     public Response getOrdersById(
             @ApiParam(value = "IDs of pets that needs to be fetched",
                     required = true) @PathParam("orderIds") List<String> orderIds)

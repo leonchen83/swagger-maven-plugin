@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
 @Api
 public class EmptyRootPathResource {
     @ApiOperation(value = "testingEmptyRootPathResource")
-    @RequestMapping(value="/testingEmptyRootPathResource",method = RequestMethod.GET)
+    @RequestMapping(value = "/testingEmptyRootPathResource", method = RequestMethod.GET)
     public ResponseEntity<String> testingEmptyRootPathResource() {
         return new ResponseEntity<String>("testingEmptyRootPathResource", HttpStatus.OK);
     }

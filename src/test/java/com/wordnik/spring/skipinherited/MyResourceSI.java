@@ -18,11 +18,11 @@ public interface MyResourceSI {
 
     @RequestMapping(method = RequestMethod.GET, value = "list")
     @ApiOperation(value = "Get a list of items",
-                  notes = "This is a contrived example"
+            notes = "This is a contrived example"
     )
     public List<ListItem> getListOfItems(
             @RequestHeader(name = "X-Simple-Param", required = true)
             @ApiParam(name = "X-Simple-Param",
-            value = "The Simple Param", required = true,
-            example = "ABC45678901234567") String param);
+                    value = "The Simple Param", required = true,
+                    example = "ABC45678901234567") String param);
 }

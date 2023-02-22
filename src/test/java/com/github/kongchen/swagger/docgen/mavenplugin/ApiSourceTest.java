@@ -31,7 +31,8 @@ public class ApiSourceTest {
     public void testGetExternalDocsNoneFound() {
         // given
         @SwaggerDefinition
-        class TestClassNoExternalDocs { }
+        class TestClassNoExternalDocs {
+        }
 
         ApiSource apiSource = spy(ApiSource.class);
         when(apiSource.getValidClasses(SwaggerDefinition.class)).thenReturn(Sets.newHashSet(TestClassNoExternalDocs.class));
@@ -47,7 +48,8 @@ public class ApiSourceTest {
     public void testGetExternalDocsFound() {
         // given
         @SwaggerDefinition(externalDocs = @io.swagger.annotations.ExternalDocs(value = "Example external docs", url = "https://example.com/docs"))
-        class TestClassExternalDocs { }
+        class TestClassExternalDocs {
+        }
 
         ApiSource apiSource = spy(ApiSource.class);
         when(apiSource.getValidClasses(SwaggerDefinition.class)).thenReturn(Sets.newHashSet(TestClassExternalDocs.class));

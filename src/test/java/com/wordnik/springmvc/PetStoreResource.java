@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@RequestMapping(value = "/store", produces = { "application/json", "application/xml" })
+@RequestMapping(value = "/store", produces = {"application/json", "application/xml"})
 @Api(value = "/store", description = "Operations about store")
 public class PetStoreResource {
     static StoreData storeData = new StoreData();
@@ -63,9 +63,9 @@ public class PetStoreResource {
     @RequestMapping(value = "/orders/{orderIds}", method = RequestMethod.GET)
     @ApiOperation(value = "Find multiple purchase orders by IDs",
             notes = "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
-        responseContainer = "List", response = Order.class)
-    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+            responseContainer = "List", response = Order.class)
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     public ResponseEntity<List<Order>> getOrdersById(
             @ApiParam(value = "IDs of pets that needs to be fetched",
                     required = true) @PathVariable("orderIds") List<String> orderIds)
@@ -85,7 +85,7 @@ public class PetStoreResource {
 
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ApiOperation(value = "Place an order for a pet")
-    @ApiResponses({ @ApiResponse(code = 400, message = "Invalid Order") })
+    @ApiResponses({@ApiResponse(code = 400, message = "Invalid Order")})
     public Order placeOrder(
             @ApiParam(value = "order placed for purchasing the pet",
                     required = true) Order order) {
@@ -96,8 +96,8 @@ public class PetStoreResource {
     @RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
     @ApiOperation(value = "Delete purchase order by ID",
             notes = "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors")
-    @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-        @ApiResponse(code = 404, message = "Order not found") })
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Invalid ID supplied"),
+            @ApiResponse(code = 404, message = "Order not found")})
     public ResponseEntity deleteOrder(
             @ApiParam(value = "ID of the order that needs to be deleted", allowableValues = "range[1,infinity]",
                     required = true) @PathVariable("orderId") String orderId) {

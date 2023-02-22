@@ -17,7 +17,7 @@ public interface MyResource {
     //contrived example test case for swagger-maven-plugin issue #505
     @RequestMapping(method = RequestMethod.GET, value = "list")
     @ApiOperation(value = "Get a list of items",
-                  notes = "This is a contrived example"
+            notes = "This is a contrived example"
     )
     public abstract List<ListItem> getListOfItems();
 }

@@ -1,13 +1,13 @@
 package com.wordnik.jaxrs;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wordnik.sample.model.Pet;
 import com.wordnik.sample.model.PetName;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 
 @Path("/")
 public class SwaggerlessResource {

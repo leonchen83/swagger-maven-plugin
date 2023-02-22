@@ -57,15 +57,15 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
     private List<SwaggerExtension> extensions;
 
     @Override
-	@BeforeMethod
+    @BeforeMethod
     protected void setUp() throws Exception {
-    	extensions = new ArrayList<SwaggerExtension>(SwaggerExtensions.getExtensions());
-    	super.setUp();
+        extensions = new ArrayList<SwaggerExtension>(SwaggerExtensions.getExtensions());
+        super.setUp();
 
         try {
             FileUtils.deleteDirectory(swaggerOutputDir);
             FileUtils.forceDelete(docOutput);
-        } catch(Exception e) {
+        } catch (Exception e) {
             //ignore
         }
 
@@ -76,8 +76,8 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
     @Override
     @AfterMethod
     protected void tearDown() throws Exception {
-    	super.tearDown();
-    	SwaggerExtensions.setExtensions(extensions);
+        super.tearDown();
+        SwaggerExtensions.setExtensions(extensions);
     }
 
     @Test
@@ -320,7 +320,7 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
             mojo.execute();
             fail();
         } catch (Exception x) {
-            Logger.getAnonymousLogger().log(Level.FINE,x.getMessage(),x);
+            Logger.getAnonymousLogger().log(Level.FINE, x.getMessage(), x);
             assertTrue(Json.mapper().isEnabled(SerializationFeature.WRITE_ENUMS_USING_TO_STRING));
             assertTrue(x.getMessage().contains("com.fasterxml.jackson.core.JsonParser.Feature"));
             assertNotNull(x.getCause());

@@ -2,14 +2,13 @@ package com.wordnik.jaxrs;
 
 import java.util.List;
 
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
-
 import com.wordnik.sample.exception.NotFoundException;
 import com.wordnik.sample.model.ListItem;
 
 import io.swagger.annotations.ApiParam;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 /**
  * @author daniele.orler

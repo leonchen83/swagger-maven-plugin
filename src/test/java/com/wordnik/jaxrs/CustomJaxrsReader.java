@@ -8,7 +8,7 @@ import io.swagger.models.Swagger;
 
 /**
  * @author Igor Gursky
- *         11.12.2015.
+ * 11.12.2015.
  */
 public class CustomJaxrsReader extends VendorExtensionsJaxrsReader {
 

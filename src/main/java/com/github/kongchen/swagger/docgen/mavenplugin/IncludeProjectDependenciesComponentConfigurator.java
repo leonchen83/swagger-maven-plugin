@@ -70,7 +70,7 @@ public class IncludeProjectDependenciesComponentConfigurator extends AbstractCom
         }
 
         // Add the plugin's dependencies (so Trove stuff works if Trove isn't on
-        return urls.toArray(new URL[urls.size()]);
+        return urls.toArray(new URL[0]);
     }
 
 }

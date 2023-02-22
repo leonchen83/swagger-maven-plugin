@@ -50,6 +50,20 @@ public class UserData {
 
     }
 
+    private static User createUser(long id, String username, String firstName,
+                                   String lastName, String email, String phone, int userStatus) {
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPassword("XXXXXXXXXXX");
+        user.setPhone(phone);
+        user.setUserStatus(userStatus);
+        return user;
+    }
+
     public User findUserByName(String username) {
         for (User user : users) {
             if (user.getUsername().equals(username)) {
@@ -78,19 +92,5 @@ public class UserData {
                 }
             }
         }
-    }
-
-    private static User createUser(long id, String username, String firstName,
-                                   String lastName, String email, String phone, int userStatus) {
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPassword("XXXXXXXXXXX");
-        user.setPhone(phone);
-        user.setUserStatus(userStatus);
-        return user;
     }
 }

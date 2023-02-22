@@ -37,7 +37,6 @@ import io.swagger.models.parameters.Parameter;
  *     <li>{@link com.github.kongchen.swagger.docgen.jaxrs.JaxrsParameterExtension}</li>
  *     <li>{@link BeanParamInjectParamExtension}</li>
  * </ul>
- *
  */
 public class IncludedSwaggerExtensionTest {
     private static final List<AbstractSwaggerExtension> SWAGGER_EXTENSIONS = Lists.newArrayList();
@@ -75,7 +74,7 @@ public class IncludedSwaggerExtensionTest {
             try {
                 parameters.add(null);
             } catch (Exception e) {
-                throw new IllegalStateException("Extension "+ swaggerExtension.getClass().getName() + " did not return a modifiable list.", e);
+                throw new IllegalStateException("Extension " + swaggerExtension.getClass().getName() + " did not return a modifiable list.", e);
             }
 
             // Test if the next extension in the chain was called
@@ -95,7 +94,7 @@ public class IncludedSwaggerExtensionTest {
                 // Still need to rethrow the exception though, to make the test fail
 
                 // TODO: Is there any better wrapper exception type?
-                throw new IllegalStateException("Extension "+ swaggerExtension.getClass().getName() + " failed this Test.", t);
+                throw new IllegalStateException("Extension " + swaggerExtension.getClass().getName() + " failed this Test.", t);
             }
         }
     }

@@ -1,8 +1,7 @@
 package com.wordnik.jaxrs;
 
-import jakarta.ws.rs.HeaderParam;
-
 import io.swagger.annotations.ApiParam;
+import jakarta.ws.rs.HeaderParam;
 
 /**
  * @author Vinayak Hulawale [vinhulawale@gmail.com]

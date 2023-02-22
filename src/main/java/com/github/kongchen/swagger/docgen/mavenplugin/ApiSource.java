@@ -129,10 +129,10 @@ public class ApiSource {
     private List<SecurityDefinition> securityDefinitions;
 
     @Parameter
-    private List<String> typesToSkip = new ArrayList<String>();
+    private List<String> typesToSkip = new ArrayList<>();
 
     @Parameter
-    private List<String> apiModelPropertyAccessExclusions = new ArrayList<String>();
+    private List<String> apiModelPropertyAccessExclusions = new ArrayList<>();
 
     @Parameter
     private boolean jsonExampleValues = false;
@@ -156,9 +156,9 @@ public class ApiSource {
     private List<ResponseMessageOverride> responseMessageOverrides;
 
     public Set<Class<?>> getValidClasses(Class<? extends Annotation> clazz) {
-        Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
+        Set<Class<?>> classes = new LinkedHashSet<>();
 
-        List<String> prefixes = new ArrayList<String>();
+        List<String> prefixes = new ArrayList<>();
         if (getLocations() == null) {
             prefixes.add("");
         } else {
@@ -189,6 +189,10 @@ public class ApiSource {
         return securityDefinitions;
     }
 
+    public void setSecurityDefinitions(List<SecurityDefinition> securityDefinitions) {
+        this.securityDefinitions = securityDefinitions;
+    }
+
     public List<String> getTypesToSkip() {
         return typesToSkip;
     }
@@ -197,15 +201,15 @@ public class ApiSource {
         this.typesToSkip = typesToSkip;
     }
 
-    public void setSecurityDefinitions(List<SecurityDefinition> securityDefinitions) {
-        this.securityDefinitions = securityDefinitions;
-    }
-
     public Info getInfo() {
         if (info == null) {
             setInfoFromAnnotation();
         }
         return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
     }
 
     private void setInfoFromAnnotation() {
@@ -278,10 +282,6 @@ public class ApiSource {
         }
     }
 
-    public void setInfo(Info info) {
-        this.info = info;
-    }
-
     public List<String> getLocations() {
         return locations;
     }
@@ -349,12 +349,12 @@ public class ApiSource {
         this.attachSwaggerArtifact = attachSwaggerArtifact;
     }
 
-    public void setSwaggerUIDocBasePath(String swaggerUIDocBasePath) {
-        this.swaggerUIDocBasePath = swaggerUIDocBasePath;
-    }
-
     public String getSwaggerUIDocBasePath() {
         return swaggerUIDocBasePath;
+    }
+
+    public void setSwaggerUIDocBasePath(String swaggerUIDocBasePath) {
+        this.swaggerUIDocBasePath = swaggerUIDocBasePath;
     }
 
     public String getHost() {
@@ -362,6 +362,10 @@ public class ApiSource {
             setHostFromAnnotation();
         }
         return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public ExternalDocs getExternalDocs() {
@@ -377,10 +381,6 @@ public class ApiSource {
 
     public void setResponseMessageOverrides(List<ResponseMessageOverride> responseMessageOverrides) {
         this.responseMessageOverrides = responseMessageOverrides;
-    }
-
-    public void setModelSubstitute(String modelSubstitute) {
-        this.modelSubstitute = modelSubstitute;
     }
 
     public String getSwaggerInternalFilter() {
@@ -400,23 +400,19 @@ public class ApiSource {
     }
 
     public List<String> getSwaggerExtensions() {
-		return swaggerExtensions;
-	}
+        return swaggerExtensions;
+    }
 
-	public void setSwaggerExtensions(List<String> swaggerExtensions) {
-		this.swaggerExtensions = swaggerExtensions;
-	}
+    public void setSwaggerExtensions(List<String> swaggerExtensions) {
+        this.swaggerExtensions = swaggerExtensions;
+    }
 
-	public String getApiSortComparator() {
+    public String getApiSortComparator() {
         return apiSortComparator;
     }
 
     public void setApiSortComparator(String apiSortComparator) {
         this.apiSortComparator = apiSortComparator;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
     }
 
     public List<String> getSchemes() {
@@ -429,6 +425,10 @@ public class ApiSource {
 
     public String getModelSubstitute() {
         return modelSubstitute;
+    }
+
+    public void setModelSubstitute(String modelSubstitute) {
+        this.modelSubstitute = modelSubstitute;
     }
 
     public boolean isSpringmvc() {
@@ -488,14 +488,14 @@ public class ApiSource {
     }
 
     public String getOperationIdFormat() {
-		return operationIdFormat;
-	}
+        return operationIdFormat;
+    }
 
-	public void setOperationIdFormat(String operationIdFormat) {
-		this.operationIdFormat = operationIdFormat;
-	}
+    public void setOperationIdFormat(String operationIdFormat) {
+        this.operationIdFormat = operationIdFormat;
+    }
 
-	private String emptyToNull(String str) {
+    private String emptyToNull(String str) {
         return StringUtils.isEmpty(str) ? null : str;
     }
 

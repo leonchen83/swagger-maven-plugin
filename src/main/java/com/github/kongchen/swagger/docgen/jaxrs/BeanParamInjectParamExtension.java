@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.ws.rs.BeanParam;
-
 import org.apache.commons.lang3.reflect.TypeUtils;
 
 import com.github.kongchen.swagger.docgen.reader.AbstractReader;
@@ -19,6 +17,7 @@ import com.sun.jersey.core.header.FormDataContentDisposition;
 import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
 import io.swagger.jaxrs.ext.SwaggerExtension;
 import io.swagger.models.parameters.Parameter;
+import jakarta.ws.rs.BeanParam;
 
 /**
  * This extension extracts the parameters inside a {@code @BeanParam} by
@@ -30,7 +29,7 @@ import io.swagger.models.parameters.Parameter;
 public class BeanParamInjectParamExtension extends AbstractSwaggerExtension {
 
 
-    private AbstractReader reader;
+    private final AbstractReader reader;
 
     public BeanParamInjectParamExtension(AbstractReader reader) {
         this.reader = reader;

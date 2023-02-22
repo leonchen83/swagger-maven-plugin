@@ -2,6 +2,7 @@ package com.wordnik.jaxrs;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiParam;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,52 +14,40 @@ import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
 
-import io.swagger.annotations.ApiParam;
-
 /**
  * @author chekong on 15/5/9.
  */
 public class MyBean extends MyParentBean {
 
+    @ApiParam(value = "testIntegerAllowableValues", defaultValue = "25", allowableValues = "25, 50, 100")
+    @QueryParam("testIntegerAllowableValues")
+    public Integer testIntegerAllowableValues;
     @ApiParam(value = "ID of pet that needs to be updated", required = true)
     @PathParam("petId")
     private String petId;
-
     @ApiParam(value = "Updated name of the pet", required = false, defaultValue = "defaultValue")
     @FormParam("name")
     private String name;
-
     @ApiParam(value = "Updated status of the pet", required = false, allowableValues = "value1, value2")
     @FormParam("status")
     private String status;
-
     @HeaderParam("myHeader")
     private String myHeader;
-
     @HeaderParam("intValue")
     private int intValue;
-
     @ApiParam(value = "hidden", hidden = true)
     @QueryParam(value = "hiddenValue")
     private String hiddenValue;
-
     @QueryParam(value = "listValue")
     private List<String> listValue;
-
     @BeanParam
     private MyNestedBean nestedBean;
-
     /**
      * This field is to test that bean params using constructor injection behave
      * correctly. It's also nested just to avoid adding too much test code.
      */
     @BeanParam
     private MyConstructorInjectedNestedBean constructorInjectedNestedBean;
-
-    @ApiParam(value = "testIntegerAllowableValues", defaultValue = "25", allowableValues = "25, 50, 100")
-    @QueryParam("testIntegerAllowableValues")
-    public Integer testIntegerAllowableValues;
-
     /**
      * This field's allowableValues, required, pattern, and defaultValue should
      * be derived based on its JAX-RS and validation annotations.

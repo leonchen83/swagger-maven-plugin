@@ -11,11 +11,9 @@ import org.testng.annotations.Test;
 
 import io.swagger.annotations.Api;
 
-public class SpringMavenDocumentSourceTest
-{
+public class SpringMavenDocumentSourceTest {
     @Test
-    public void testGetValidClasses() throws Exception
-    {
+    public void testGetValidClasses() throws Exception {
         Log log = new SystemStreamLog();
 
         ApiSource apiSource = new ApiSource();
@@ -33,13 +31,11 @@ public class SpringMavenDocumentSourceTest
 
 
     @RestController
-    private static class ExampleController1
-    {
+    private static class ExampleController1 {
     }
 
     @Api
     @RestController
-    private static class ExampleController2
-    {
+    private static class ExampleController2 {
     }
 }

@@ -20,7 +20,7 @@ public class ServletReader extends AbstractReader implements ClassSwaggerReader 
 
     @Override
     public Swagger read(Set<Class<?>> classes) throws GenerateException {
-        Reader.read(swagger, classes );
+        Reader.read(swagger, classes);
         return swagger;
     }
 

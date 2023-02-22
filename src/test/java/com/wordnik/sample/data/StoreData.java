@@ -38,6 +38,16 @@ public class StoreData {
         orders.add(createOrder(15, 3, 2, new Date(), "placed"));
     }
 
+    private static Order createOrder(long id, long petId, int quantity, Date shipDate, String status) {
+        Order order = new Order();
+        order.setId(id);
+        order.setPetId(petId);
+        order.setQuantity(quantity);
+        order.setShipDate(shipDate);
+        order.setStatus(status);
+        return order;
+    }
+
     public Order findOrderById(long orderId) {
         for (Order order : orders) {
             if (order.getId() == orderId) {
@@ -67,15 +77,5 @@ public class StoreData {
                 }
             }
         }
-    }
-
-    private static Order createOrder(long id, long petId, int quantity, Date shipDate, String status) {
-        Order order = new Order();
-        order.setId(id);
-        order.setPetId(petId);
-        order.setQuantity(quantity);
-        order.setShipDate(shipDate);
-        order.setStatus(status);
-        return order;
     }
 }

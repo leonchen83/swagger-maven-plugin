@@ -38,5 +38,5 @@ public class VendorExtensionWithoutReader extends AbstractSwaggerExtension {
             chain.next().decorateOperation(operation, method, chain);
         }
     }
-    
+
 }

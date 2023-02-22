@@ -19,11 +19,10 @@ package com.wordnik.sample.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
-import io.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Pet")
 public class Pet {

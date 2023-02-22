@@ -17,7 +17,7 @@ public class VendorExtensionsJaxrsReader extends JaxrsReader {
     public VendorExtensionsJaxrsReader(Swagger swagger, Log LOG) {
         super(swagger, LOG);
 
-        List<SwaggerExtension> extensions = new LinkedList<SwaggerExtension>(SwaggerExtensions.getExtensions());
+        List<SwaggerExtension> extensions = new LinkedList<>(SwaggerExtensions.getExtensions());
         extensions.add(new TestVendorExtension());
         SwaggerExtensions.setExtensions(extensions);
     }

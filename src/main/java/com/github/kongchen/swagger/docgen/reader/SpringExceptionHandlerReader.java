@@ -19,7 +19,7 @@ public class SpringExceptionHandlerReader {
     private final Log log;
 
     private Map<Class<? extends Throwable>, ResponseStatus> exceptionMapping =
-            new HashMap<Class<? extends Throwable>, ResponseStatus>();
+            new HashMap<>();
 
     public SpringExceptionHandlerReader(Log log) {
         this.log = log;
@@ -31,10 +31,10 @@ public class SpringExceptionHandlerReader {
 
     protected Map<Class<? extends Throwable>, ResponseStatus> generateExceptionMapping(Set<Class<?>> classes) {
         Map<Class<? extends Throwable>, ResponseStatus> result =
-                new HashMap<Class<? extends Throwable>, ResponseStatus>();
+                new HashMap<>();
 
-        log.debug(String.format("Looking for classes with @ControllerAdvice annotation"));
-        for (Class clazz: classes) {
+        log.debug("Looking for classes with @ControllerAdvice annotation");
+        for (Class<?> clazz : classes) {
             ControllerAdvice advice = findAnnotation(clazz, ControllerAdvice.class);
             if (advice == null) {
                 continue;
@@ -42,7 +42,7 @@ public class SpringExceptionHandlerReader {
 
             log.debug(String.format("%s is annotated as @ControllerAdvice", clazz.getName()));
 
-            for (Method method: clazz.getMethods()) {
+            for (Method method : clazz.getMethods()) {
                 ExceptionHandler handler = findAnnotation(method, ExceptionHandler.class);
                 if (handler == null) {
                     log.debug(String.format("@ExceptionHandler is missing on %s method, skipping", method));
@@ -55,8 +55,8 @@ public class SpringExceptionHandlerReader {
                     continue;
                 }
 
-                Class[] exceptionClasses = handler.value();
-                for (Class exceptionClass: exceptionClasses) {
+                Class<? extends Throwable>[] exceptionClasses = handler.value();
+                for (Class<? extends Throwable> exceptionClass : exceptionClasses) {
                     log.debug(String.format("%s will be mapped to %s", exceptionClass, responseStatus));
                     result.put(exceptionClass, responseStatus);
                 }
@@ -67,8 +67,8 @@ public class SpringExceptionHandlerReader {
     }
 
     protected List<ResponseStatus> getResponseStatusesFromExceptions(Method method) {
-        List<ResponseStatus> result = new LinkedList<ResponseStatus>();
-        for (Class exceptionClass: method.getExceptionTypes()) {
+        List<ResponseStatus> result = new LinkedList<>();
+        for (Class<?> exceptionClass : method.getExceptionTypes()) {
             ResponseStatus responseStatus = exceptionMapping.get(exceptionClass);
 
             // fallback to exception own annotation

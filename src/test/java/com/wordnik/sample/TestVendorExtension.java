@@ -47,5 +47,6 @@ public class TestVendorExtension extends AbstractSwaggerExtension {
      */
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
-    public @interface TestVendorAnnotation {}
+    public @interface TestVendorAnnotation {
+    }
 }

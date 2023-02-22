@@ -5,20 +5,18 @@
  */
 package com.wordnik.jaxrs;
 
-import jakarta.ws.rs.Path;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.ws.rs.Path;
 
 /**
- *
  * @author pradeep.chaudhary
  */
 @Path("/v1.0")
 @Api
 public class ParentResource {
     @Path("/sub")
-    @ApiOperation(value="SubResource")
+    @ApiOperation(value = "SubResource")
     public SubResource getStudyResource() {
         return new SubResource();
     }

@@ -19,11 +19,6 @@ package com.wordnik.jaxrs;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.core.Response;
-
 import com.wordnik.sample.JavaRestResourceUtil;
 import com.wordnik.sample.data.PetData;
 import com.wordnik.sample.model.ListItem;
@@ -31,6 +26,10 @@ import com.wordnik.sample.model.Pet;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("/myResourceImpl")
 public class MyResourceImpl extends MyResourceAbstract<String> {
@@ -40,7 +39,7 @@ public class MyResourceImpl extends MyResourceAbstract<String> {
     //contrived example test case for swagger-maven-plugin issue #358
     /* (non-Javadoc)
      * @see com.wordnik.jaxrs.MyResource#getPetsById(java.lang.Long, java.lang.Long)
-	 */
+     */
     @Override
     public Response getPetsById(Long startId, Long endId)
             throws com.wordnik.sample.exception.NotFoundException {
@@ -54,8 +53,8 @@ public class MyResourceImpl extends MyResourceAbstract<String> {
 
     //contrived example test case for swagger-maven-plugin issue #505
     /* (non-Javadoc)
-	 * @see com.wordnik.jaxrs.MyResource#getListOfItems()
-	 */
+     * @see com.wordnik.jaxrs.MyResource#getListOfItems()
+     */
     @Path("list")
     @Override
     public List<ListItem> getListOfItems() {

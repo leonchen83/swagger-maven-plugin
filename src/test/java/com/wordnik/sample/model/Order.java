@@ -18,12 +18,11 @@ package com.wordnik.sample.model;
 
 import java.util.Date;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-
 import com.google.common.base.Optional;
 
 import io.swagger.annotations.ApiModelProperty;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Order")
 public class Order {
@@ -94,9 +93,13 @@ public class Order {
     }
 
     @XmlElement(name = "optionalStatus")
-    public Optional<String> getOptionalStatus() { return optionalStatus; }
+    public Optional<String> getOptionalStatus() {
+        return optionalStatus;
+    }
 
-    public void setOptionalStatus(@SuppressWarnings("OptionalUsedAsFieldOrParameterType") Optional<String> optionalStatus) { this.optionalStatus = optionalStatus; }
+    public void setOptionalStatus(@SuppressWarnings("OptionalUsedAsFieldOrParameterType") Optional<String> optionalStatus) {
+        this.optionalStatus = optionalStatus;
+    }
 
     @ApiModelProperty(name = "internalThing", access = "secret-property")
     public String getInternalThing() {

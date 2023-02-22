@@ -30,7 +30,7 @@ public class ModelModifierTest {
 
     @Test
     public void testProcessFieldInParentClass() throws Exception {
-        ModelModifier modelModifier =  new ModelModifier(Json.mapper());
+        ModelModifier modelModifier = new ModelModifier(Json.mapper());
         modelModifier.setApiModelPropertyAccessExclusions(Arrays.asList("public"));
 
         JavaType type = SimpleType.constructUnsafe(B.class);

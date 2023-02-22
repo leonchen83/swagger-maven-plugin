@@ -32,10 +32,10 @@ public class SpringMvcSkipInheritedTest extends AbstractMojoTestCase {
     private List<SwaggerExtension> extensions;
 
     @Override
-	@BeforeMethod
+    @BeforeMethod
     protected void setUp() throws Exception {
-    	extensions = new ArrayList<SwaggerExtension>(SwaggerExtensions.getExtensions());
-    	super.setUp();
+        extensions = new ArrayList<SwaggerExtension>(SwaggerExtensions.getExtensions());
+        super.setUp();
 
         try {
             FileUtils.deleteDirectory(swaggerOutputDir);
@@ -51,8 +51,8 @@ public class SpringMvcSkipInheritedTest extends AbstractMojoTestCase {
     @Override
     @AfterMethod
     protected void tearDown() throws Exception {
-    	super.tearDown();
-    	SwaggerExtensions.setExtensions(extensions);
+        super.tearDown();
+        SwaggerExtensions.setExtensions(extensions);
     }
 
     @Test

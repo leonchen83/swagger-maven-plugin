@@ -16,16 +16,6 @@
 
 package com.wordnik.jaxrs;
 
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Response;
-
 import com.wordnik.sample.data.UserData;
 import com.wordnik.sample.exception.ApiException;
 import com.wordnik.sample.exception.NotFoundException;
@@ -41,6 +31,15 @@ import io.swagger.annotations.Info;
 import io.swagger.annotations.License;
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 @SwaggerDefinition(
         host = "www.example.com:8080",
@@ -53,8 +52,8 @@ import io.swagger.annotations.Tag;
                 contact = @Contact(name = "Kong Chen", email = "kongchen@gmail.com", url = "http://kongch.com"),
                 license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html")
         ),
-        tags = { @Tag(name = "user", description = "Operations about user"),
-                 @Tag(name = "spurioustag", description = "Operations about something spurious")
+        tags = {@Tag(name = "user", description = "Operations about user"),
+                @Tag(name = "spurioustag", description = "Operations about something spurious")
         }
 )
 @Path("/user")

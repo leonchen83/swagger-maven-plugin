@@ -57,19 +57,9 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
 
     private final static String DEFAULT_VALUE = "\n\t\t\n\t\t\n\ue000\ue001\ue002\n\t\t\t\t\n";
 
-    private static final RequestParam DEFAULT_REQUEST_PARAM = (RequestParam)MethodUtils.getMatchingMethod(AnnotationBearer.class, "get", String.class).getParameterAnnotations()[0][0];
+    private static final RequestParam DEFAULT_REQUEST_PARAM = (RequestParam) MethodUtils.getMatchingMethod(AnnotationBearer.class, "get", String.class).getParameterAnnotations()[0][0];
 
-    private Log log;
-
-    // Class specificly for holding default value annotations
-    private static class AnnotationBearer {
-        /**
-         * Only used to get annotations..
-         * @param requestParam ignore this
-         */
-        public void get(@RequestParam String requestParam) {
-        }
-    }
+    private final Log log;
 
     public SpringSwaggerExtension(Log log) {
         this.log = log;
@@ -124,7 +114,7 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
         List<Parameter> parameters = new ArrayList<>();
 
         if (isRequestParamType(type, annotations)) {
-            parameters.add(extractRequestParam(type, (RequestParam)annotations.get(RequestParam.class)));
+            parameters.add(extractRequestParam(type, (RequestParam) annotations.get(RequestParam.class)));
         }
         if (annotations.containsKey(PathVariable.class)) {
             PathVariable pathVariable = (PathVariable) annotations.get(PathVariable.class);
@@ -270,8 +260,8 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
     }
 
     private List<Parameter> extractParametersFromModelAttributeAnnotation(Type type, Map<Class<?>, Annotation> annotations) {
-        ModelAttribute modelAttribute = (ModelAttribute)annotations.get(ModelAttribute.class);
-        if ((modelAttribute == null || !hasClassStartingWith(annotations.keySet(), "org.springframework.web.bind.annotation"))&& BeanUtils.isSimpleProperty(TypeUtils.getRawType(type, null))) {
+        ModelAttribute modelAttribute = (ModelAttribute) annotations.get(ModelAttribute.class);
+        if ((modelAttribute == null || !hasClassStartingWith(annotations.keySet(), "org.springframework.web.bind.annotation")) && BeanUtils.isSimpleProperty(TypeUtils.getRawType(type, null))) {
             return Collections.emptyList();
         }
 
@@ -295,7 +285,7 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
                     continue;
                 }
 
-                Class parameterClass = propertyDescriptor.getPropertyType();
+                Class<?> parameterClass = propertyDescriptor.getPropertyType();
                 List<Parameter> propertySetterExtractedParameters = this.extractParametersFromAnnotation(
                         parameterClass, toMap(Arrays.asList(parameterAnnotations[0])));
 
@@ -340,5 +330,16 @@ public class SpringSwaggerExtension extends AbstractSwaggerExtension {
 
         return clazzName.startsWith("org.springframework") &&
                 !"org.springframework.web.multipart.MultipartFile".equals(clazzName);
+    }
+
+    // Class specificly for holding default value annotations
+    private static class AnnotationBearer {
+        /**
+         * Only used to get annotations..
+         *
+         * @param requestParam ignore this
+         */
+        public void get(@RequestParam String requestParam) {
+        }
     }
 }

@@ -8,10 +8,9 @@ import io.swagger.jackson.SwaggerAnnotationIntrospector;
 
 /**
  * Extends SwaggerAnnotationIntrospector with {@link #findRootName(AnnotatedClass)} implementation. See
- * https://github.com/swagger-api/swagger-core/issues/2104
- * 
- * @author Tomasz Juchniewicz
+ * <a href="https://github.com/swagger-api/swagger-core/issues/2104">issues-2104</a>
  *
+ * @author Tomasz Juchniewicz
  */
 public class EnhancedSwaggerAnnotationIntrospector extends SwaggerAnnotationIntrospector {
 

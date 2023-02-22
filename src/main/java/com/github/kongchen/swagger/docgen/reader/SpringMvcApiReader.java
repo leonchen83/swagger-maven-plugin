@@ -61,9 +61,9 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
 
     @Override
     protected void updateExtensionChain() {
-    	List<SwaggerExtension> extensions = new ArrayList<SwaggerExtension>();
-    	extensions.add(new SpringSwaggerExtension(LOG));
-    	SwaggerExtensions.setExtensions(extensions);
+        List<SwaggerExtension> extensions = new ArrayList<SwaggerExtension>();
+        extensions.add(new SpringSwaggerExtension(LOG));
+        SwaggerExtensions.setExtensions(extensions);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
         //create map - resource string (after first slash) as key, new SpringResource as value
         Map<String, SpringResource> resourceMap = generateResourceMap(classes);
         exceptionHandlerReader.processExceptionHandlers(classes);
-        for (SpringResource resource: resourceMap.values()) {
+        for (SpringResource resource : resourceMap.values()) {
             read(resource);
         }
 
@@ -169,7 +169,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
 
         ApiOperation apiOperation = findMergedAnnotation(method, ApiOperation.class);
 
-        if(apiOperation != null) {
+        if (apiOperation != null) {
             if (apiOperation.hidden()) {
                 return null;
             }
@@ -192,7 +192,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
             }
 
             ///security
-            List<SecurityRequirement> securities = new ArrayList<SecurityRequirement>();
+            List<SecurityRequirement> securities = new ArrayList<>();
             for (Authorization auth : apiOperation.authorizations()) {
                 if (!auth.value().isEmpty()) {
                     SecurityRequirement security = new SecurityRequirement();
@@ -222,7 +222,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
         }
         boolean hasApiAnnotation = false;
         if (responseClass instanceof Class) {
-            hasApiAnnotation = findAnnotation((Class) responseClass, Api.class) != null;
+            hasApiAnnotation = findAnnotation((Class<?>) responseClass, Api.class) != null;
         }
         if (responseClass != null
                 && !responseClass.equals(Void.class)
@@ -285,7 +285,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
         }
 
         List<ResponseStatus> errorResponses = exceptionHandlerReader.getResponseStatusesFromExceptions(method);
-        for (ResponseStatus responseStatus: errorResponses) {
+        for (ResponseStatus responseStatus : errorResponses) {
             int code = responseStatus.code().value();
             String description = defaultIfEmpty(responseStatus.reason(), responseStatus.code().getReasonPhrase());
             operation.response(code, new Response().description(description));
@@ -299,7 +299,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
         }
 
         // process parameters
-        Class[] parameterTypes = method.getParameterTypes();
+        Class<?>[] parameterTypes = method.getParameterTypes();
         Type[] genericParameterTypes = method.getGenericParameterTypes();
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
         DefaultParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
@@ -312,7 +312,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
             List<Parameter> parameters = getParameters(type, annotations);
 
             for (Parameter parameter : parameters) {
-                if(parameter.getName().isEmpty()) {
+                if (parameter.getName().isEmpty()) {
                     parameter.setName(parameterNames[i]);
                 }
                 operation.parameter(parameter);
@@ -381,7 +381,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
 
     //Helper method for loadDocuments()
     private Map<String, SpringResource> analyzeController(Class<?> controllerClazz, Map<String, SpringResource> resourceMap, String description) {
-	String[] controllerRequestMappingValues = SpringUtils.getControllerResquestMapping(controllerClazz);
+        String[] controllerRequestMappingValues = SpringUtils.getControllerResquestMapping(controllerClazz);
 
         // Iterate over all value attributes of the class-level RequestMapping annotation
         for (String controllerRequestMappingValue : controllerRequestMappingValues) {
