@@ -1,21 +1,24 @@
 package com.github.kongchen.swagger.docgen.jaxrs;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.models.parameters.AbstractSerializableParameter;
-import io.swagger.models.parameters.Parameter;
-import org.apache.commons.lang3.reflect.MethodUtils;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.QueryParam;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
+
+import org.apache.commons.lang3.reflect.MethodUtils;
+import org.testng.annotations.Test;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.models.parameters.AbstractSerializableParameter;
+import io.swagger.models.parameters.Parameter;
 
 public class JaxrsParameterExtensionTest {
     @Test

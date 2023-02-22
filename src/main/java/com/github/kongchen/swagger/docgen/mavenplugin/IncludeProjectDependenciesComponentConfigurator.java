@@ -1,7 +1,14 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
 
-import org.codehaus.classworlds.ClassRealm;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.codehaus.classworlds.ClassRealmAdapter;
+import org.codehaus.plexus.classworlds.realm.ClassRealm;
 import org.codehaus.plexus.component.configurator.AbstractComponentConfigurator;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ConfigurationListener;
@@ -9,12 +16,6 @@ import org.codehaus.plexus.component.configurator.converters.composite.ObjectWit
 import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluationException;
 import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator;
 import org.codehaus.plexus.configuration.PlexusConfiguration;
-
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A custom ComponentConfigurator which adds the project's runtime classpath elements
@@ -30,18 +31,17 @@ import java.util.List;
 public class IncludeProjectDependenciesComponentConfigurator extends AbstractComponentConfigurator {
 
     @Override
-    public void configureComponent(Object component, PlexusConfiguration configuration,
-                                   ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm,
-                                   ConfigurationListener listener)
+    public void configureComponent(Object component, PlexusConfiguration configuration, ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm, ConfigurationListener listener)
             throws ComponentConfigurationException {
-        addProjectDependenciesToClassRealm(expressionEvaluator, containerRealm);
+        final org.codehaus.classworlds.ClassRealm legacyRealm = ClassRealmAdapter.getInstance(containerRealm);
+        addProjectDependenciesToClassRealm(expressionEvaluator, legacyRealm);
 
         ObjectWithFieldsConverter converter = new ObjectWithFieldsConverter();
-        converter.processConfiguration(converterLookup, component, containerRealm.getClassLoader(), configuration,
+        converter.processConfiguration(converterLookup, component, legacyRealm.getClassLoader(), configuration,
                 expressionEvaluator, listener);
     }
 
-    private void addProjectDependenciesToClassRealm(ExpressionEvaluator expressionEvaluator, ClassRealm containerRealm) throws ComponentConfigurationException {
+    private void addProjectDependenciesToClassRealm(ExpressionEvaluator expressionEvaluator, org.codehaus.classworlds.ClassRealm legacyRealm) throws ComponentConfigurationException {
         List<String> compileClasspathElements;
         try {
             //noinspection unchecked
@@ -53,7 +53,7 @@ public class IncludeProjectDependenciesComponentConfigurator extends AbstractCom
         // Add the project dependencies to the ClassRealm
         final URL[] urls = buildURLs(compileClasspathElements);
         for (URL url : urls) {
-            containerRealm.addConstituent(url);
+            legacyRealm.addConstituent(url);
         }
     }
 

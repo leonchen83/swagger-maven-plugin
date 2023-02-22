@@ -16,10 +16,10 @@
 
 package com.wordnik.sample.data;
 
-import com.wordnik.sample.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.wordnik.sample.model.User;
 
 public class UserData {
     static List<User> users = new ArrayList<User>();

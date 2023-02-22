@@ -1,10 +1,5 @@
 package com.wordnik.sample;
 
-import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.models.Operation;
-import io.swagger.models.Response;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,6 +8,11 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.models.Operation;
+import io.swagger.models.Response;
 
 /**
  * @see com.wordnik.jaxrs.VendorExtensionsJaxrsReader

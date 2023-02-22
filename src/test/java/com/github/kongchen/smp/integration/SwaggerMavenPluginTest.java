@@ -1,5 +1,36 @@
 package com.github.kongchen.smp.integration;
 
+import static com.github.kongchen.smp.integration.utils.TestUtils.YamlToJson;
+import static com.github.kongchen.smp.integration.utils.TestUtils.changeDescription;
+import static com.github.kongchen.smp.integration.utils.TestUtils.createTempDirPath;
+import static com.github.kongchen.smp.integration.utils.TestUtils.setCustomReader;
+import static net.javacrumbs.jsonunit.JsonAssert.assertJsonEquals;
+import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.codehaus.jettison.json.JSONException;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+import org.yaml.snakeyaml.Yaml;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,32 +39,11 @@ import com.github.kongchen.smp.integration.utils.PetIdToStringModelConverter;
 import com.github.kongchen.swagger.docgen.mavenplugin.ApiDocumentMojo;
 import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
 import com.google.common.collect.ImmutableList;
+
 import io.swagger.jaxrs.ext.SwaggerExtension;
 import io.swagger.jaxrs.ext.SwaggerExtensions;
 import io.swagger.util.Json;
 import net.javacrumbs.jsonunit.core.Configuration;
-import org.apache.commons.io.FileUtils;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.testing.AbstractMojoTestCase;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static com.github.kongchen.smp.integration.utils.TestUtils.*;
-import static net.javacrumbs.jsonunit.JsonAssert.assertJsonEquals;
-import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
 
 /**
  * @author chekong on 8/15/14.
@@ -62,7 +72,7 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
         File testPom = new File(getBasedir(), "target/test-classes/plugin-config.xml");
         mojo = (ApiDocumentMojo) lookupMojo("generate", testPom);
     }
-    
+
     @Override
     @AfterMethod
     protected void tearDown() throws Exception {
@@ -235,7 +245,7 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
     }
 
     @Test
-    public void testCustomModelConverterYaml() throws MojoFailureException, MojoExecutionException, IOException {
+    public void testCustomModelConverterYaml() throws MojoFailureException, MojoExecutionException, IOException, JSONException {
         mojo.getApiSources().get(0).setModelConverters(ImmutableList.of(PetIdToStringModelConverter.class.getName()));
 
         assertGeneratedSwaggerSpecYaml("This is a sample.", "/expectedOutput/swagger-with-converter.yaml");
@@ -276,7 +286,7 @@ public class SwaggerMavenPluginTest extends AbstractMojoTestCase {
         assertGeneratedSwaggerSpecJson(description, expectedOutput, "swagger.json");
     }
 
-    private void assertGeneratedSwaggerSpecYaml(String description, String expectedOutput) throws MojoExecutionException, MojoFailureException, IOException {
+    private void assertGeneratedSwaggerSpecYaml(String description, String expectedOutput) throws MojoExecutionException, MojoFailureException, IOException, JSONException {
         mojo.getApiSources().get(0).setOutputFormats("yaml");
         mojo.execute();
 

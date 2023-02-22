@@ -1,19 +1,28 @@
 package com.github.kongchen.smp.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.kongchen.swagger.docgen.mavenplugin.ApiDocumentMojo;
-import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
-import com.google.common.base.CharMatcher;
-import com.google.common.io.Files;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.jaxrs.ext.SwaggerExtensions;
-import io.swagger.util.Json;
-import net.javacrumbs.jsonunit.core.Configuration;
+import static com.github.kongchen.smp.integration.utils.TestUtils.YamlToJson;
+import static com.github.kongchen.smp.integration.utils.TestUtils.changeDescription;
+import static com.github.kongchen.smp.integration.utils.TestUtils.createTempDirPath;
+import static com.github.kongchen.smp.integration.utils.TestUtils.setCustomReader;
+import static net.javacrumbs.jsonunit.JsonAssert.assertJsonEquals;
+import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
+import org.codehaus.jettison.json.JSONException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,16 +31,17 @@ import org.testng.annotations.Test;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.kongchen.swagger.docgen.mavenplugin.ApiDocumentMojo;
+import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
+import com.google.common.base.CharMatcher;
+import com.google.common.io.Files;
 
-import static com.github.kongchen.smp.integration.utils.TestUtils.*;
-import static net.javacrumbs.jsonunit.JsonAssert.assertJsonEquals;
-import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.jaxrs.ext.SwaggerExtensions;
+import io.swagger.util.Json;
+import net.javacrumbs.jsonunit.core.Configuration;
 
 /**
  * @author chekong on 8/15/14.
@@ -222,7 +232,7 @@ public class SpringMvcTest extends AbstractMojoTestCase {
         assertJsonEquals(expectJson, actualJson, Configuration.empty().when(IGNORING_ARRAY_ORDER));
     }
 
-    private void assertGeneratedSwaggerSpecYaml(String description) throws MojoExecutionException, MojoFailureException, IOException {
+    private void assertGeneratedSwaggerSpecYaml(String description) throws MojoExecutionException, MojoFailureException, IOException, JSONException {
         mojo.getApiSources().get(0).setOutputFormats("yaml");
         mojo.execute();
 

@@ -16,10 +16,10 @@
 
 package com.wordnik.springmvc;
 
-import com.wordnik.sample.model.ListItem;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.wordnik.sample.model.ListItem;
 
 public class MyResourceImpl implements MyResource {
 

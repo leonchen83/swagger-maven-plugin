@@ -1,21 +1,24 @@
 package com.github.kongchen.swagger.docgen.jaxrs;
 
-import com.github.kongchen.swagger.docgen.reader.AbstractReader;
-import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
-import com.google.common.collect.Lists;
-import com.sun.jersey.api.core.InjectParam;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.models.parameters.Parameter;
-import org.apache.commons.lang3.reflect.TypeUtils;
-
-import javax.ws.rs.BeanParam;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import jakarta.ws.rs.BeanParam;
+
+import org.apache.commons.lang3.reflect.TypeUtils;
+
+import com.github.kongchen.swagger.docgen.reader.AbstractReader;
+import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
+import com.google.common.collect.Lists;
+import com.sun.jersey.api.core.InjectParam;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+
+import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.models.parameters.Parameter;
 
 /**
  * This extension extracts the parameters inside a {@code @BeanParam} by

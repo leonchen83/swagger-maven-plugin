@@ -1,13 +1,15 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
-import com.github.kongchen.swagger.docgen.AbstractDocumentSource;
-import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
-import com.google.common.collect.Sets;
+import java.util.Set;
+
+import jakarta.ws.rs.Path;
+
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 
-import javax.ws.rs.Path;
-import java.util.Set;
+import com.github.kongchen.swagger.docgen.AbstractDocumentSource;
+import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
+import com.google.common.collect.Sets;
 
 /**
  * @author chekong

@@ -1,22 +1,24 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
-import com.google.common.collect.Sets;
-import io.swagger.annotations.Extension;
-import io.swagger.annotations.ExtensionProperty;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.models.ExternalDocs;
-import io.swagger.models.Info;
-import org.mockito.MockitoAnnotations;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.google.common.collect.Sets;
+
+import io.swagger.annotations.Extension;
+import io.swagger.annotations.ExtensionProperty;
+import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.models.ExternalDocs;
+import io.swagger.models.Info;
 
 public class ApiSourceTest {
 

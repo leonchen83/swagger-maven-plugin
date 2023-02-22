@@ -1,9 +1,10 @@
 package com.wordnik.jaxrs;
 
-import io.swagger.models.Swagger;
+import java.util.Set;
+
 import org.apache.maven.plugin.logging.Log;
 
-import java.util.Set;
+import io.swagger.models.Swagger;
 
 /**
  * @author Igor Gursky

@@ -1,14 +1,16 @@
 package com.github.kongchen.smp.integration.utils;
 
+import java.io.File;
+import java.util.Map;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.yaml.snakeyaml.Yaml;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.kongchen.swagger.docgen.mavenplugin.ApiDocumentMojo;
 import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
-import org.codehaus.jettison.json.JSONObject;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.File;
-import java.util.Map;
 
 /**
  * @author Igor Gursky
@@ -16,9 +18,9 @@ import java.util.Map;
  */
 public class TestUtils {
 
-    public static String YamlToJson(String yamlString) {
+    public static String YamlToJson(String yamlString) throws JSONException {
         Yaml yaml = new Yaml();
-        Map<String, Object> map = (Map<String, Object>) yaml.load(yamlString);
+        Map<String, Object> map = yaml.load(yamlString);
         return new JSONObject(map).toString();
     }
 

@@ -1,7 +1,8 @@
 package com.wordnik.springmvc;
 
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import io.swagger.annotations.ApiParam;
 
 public class UpdatePetRequest {
     private String petId;

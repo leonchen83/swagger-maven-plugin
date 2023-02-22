@@ -1,11 +1,39 @@
 package com.github.kongchen.swagger.docgen;
 
+import static org.apache.commons.lang3.StringUtils.defaultString;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.logging.Log;
+
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule.Priority;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule.Priority;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;
@@ -17,6 +45,7 @@ import com.github.kongchen.swagger.docgen.mavenplugin.SecurityDefinition;
 import com.github.kongchen.swagger.docgen.reader.AbstractReader;
 import com.github.kongchen.swagger.docgen.reader.ClassSwaggerReader;
 import com.github.kongchen.swagger.docgen.reader.ModelModifier;
+
 import io.swagger.annotations.Api;
 import io.swagger.config.FilterFactory;
 import io.swagger.converter.ModelConverter;
@@ -32,21 +61,6 @@ import io.swagger.models.auth.SecuritySchemeDefinition;
 import io.swagger.models.properties.Property;
 import io.swagger.util.Json;
 import io.swagger.util.Yaml;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
-
-import java.io.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.nio.charset.Charset;
-import java.util.*;
-
-import static org.apache.commons.lang3.StringUtils.defaultString;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * @author chekong 05/13/2013
@@ -226,7 +240,7 @@ public abstract class AbstractDocumentSource<D extends AbstractReader & ClassSwa
     public void loadModelModifier() throws GenerateException, IOException {
         ObjectMapper objectMapper = Json.mapper();
         if (apiSource.isUseJAXBAnnotationProcessor()) {
-            JaxbAnnotationModule jaxbAnnotationModule = new JaxbAnnotationModule();
+	        JakartaXmlBindAnnotationModule jaxbAnnotationModule = new JakartaXmlBindAnnotationModule();
             if (apiSource.isUseJAXBAnnotationProcessorAsPrimary()) {
                 jaxbAnnotationModule.setPriority(Priority.PRIMARY);
             } else {

@@ -1,20 +1,22 @@
 package com.github.kongchen.swagger.docgen.spring;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.wordnik.sample.model.PaginationHelper;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.models.parameters.Parameter;
-import org.apache.commons.lang3.reflect.MethodUtils;
-import org.apache.maven.plugin.logging.SystemStreamLog;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import org.apache.commons.lang3.reflect.MethodUtils;
+import org.apache.maven.plugin.logging.SystemStreamLog;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.testng.annotations.Test;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.wordnik.sample.model.PaginationHelper;
+
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.models.parameters.Parameter;
 
 public class SpringSwaggerExtensionTest {
     @Test

@@ -1,15 +1,21 @@
 package com.wordnik.jaxrs;
 
+import java.util.List;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
+
 import com.wordnik.sample.model.ListItem;
 import com.wordnik.sample.model.Pet;
-import io.swagger.annotations.*;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Api(description = "Operations about pets")
 @Produces({"application/json", "application/xml"})

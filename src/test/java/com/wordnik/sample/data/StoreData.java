@@ -16,11 +16,11 @@
 
 package com.wordnik.sample.data;
 
-import com.wordnik.sample.model.Order;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.wordnik.sample.model.Order;
 
 public class StoreData {
     static List<Order> orders = new ArrayList<Order>();

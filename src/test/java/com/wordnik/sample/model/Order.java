@@ -16,12 +16,14 @@
 
 package com.wordnik.sample.model;
 
-import com.google.common.base.Optional; // Must be Google Guava Optional, because we run Java 6.
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+import com.google.common.base.Optional;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @XmlRootElement(name = "Order")
 public class Order {

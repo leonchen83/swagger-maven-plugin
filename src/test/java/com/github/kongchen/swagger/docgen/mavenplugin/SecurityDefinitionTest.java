@@ -1,13 +1,15 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
-import com.github.kongchen.swagger.docgen.GenerateException;
-import io.swagger.models.auth.ApiKeyAuthDefinition;
-import io.swagger.models.auth.OAuth2Definition;
-import io.swagger.models.auth.SecuritySchemeDefinition;
+import java.util.Map;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Map;
+import com.github.kongchen.swagger.docgen.GenerateException;
+
+import io.swagger.models.auth.ApiKeyAuthDefinition;
+import io.swagger.models.auth.OAuth2Definition;
+import io.swagger.models.auth.SecuritySchemeDefinition;
 
 public class SecurityDefinitionTest {
     @Test

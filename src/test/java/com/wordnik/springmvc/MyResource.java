@@ -1,12 +1,14 @@
 package com.wordnik.springmvc;
 
-import com.wordnik.sample.model.ListItem;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
+import com.wordnik.sample.model.ListItem;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @Api(description = "Operations about pets")
 @RequestMapping(value = "/myResourceImpl", produces = {"application/json", "application/xml"})

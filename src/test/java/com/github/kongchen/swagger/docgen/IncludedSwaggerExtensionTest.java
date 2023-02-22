@@ -1,21 +1,34 @@
 package com.github.kongchen.swagger.docgen;
 
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anySet;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.maven.plugin.logging.SystemStreamLog;
+import org.testng.annotations.Test;
+
 import com.github.kongchen.swagger.docgen.jaxrs.BeanParamInjectParamExtension;
 import com.github.kongchen.swagger.docgen.jaxrs.JaxrsParameterExtension;
 import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
 import com.github.kongchen.swagger.docgen.spring.SpringSwaggerExtension;
 import com.google.common.collect.Lists;
+
 import io.swagger.jaxrs.ext.AbstractSwaggerExtension;
 import io.swagger.jaxrs.ext.SwaggerExtension;
 import io.swagger.models.parameters.Parameter;
-import org.apache.maven.plugin.logging.SystemStreamLog;
-import org.testng.annotations.Test;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.*;
-
-import static org.mockito.Mockito.*;
 
 /**
  * Test class which ensures common functionality across all of the currently included Swagger Extensions, namely </p>
@@ -67,10 +80,12 @@ public class IncludedSwaggerExtensionTest {
 
             // Test if the next extension in the chain was called
             try {
+                List<Annotation> list = anyList();
+                Set<Type> set = anySet();
                 verify(extension).extractParameters(
-                        anyListOf(Annotation.class),
+                        list,
                         any(Type.class),
-                        anySetOf(Type.class),
+                        set,
                         eq(iterator)
                 );
             } catch (Throwable t) {

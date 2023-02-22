@@ -1,13 +1,17 @@
 package com.github.kongchen.swagger.docgen.util;
 
-import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
-
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import com.github.kongchen.swagger.docgen.reader.JaxrsReader;
 
 public class TypeExtracter {
 

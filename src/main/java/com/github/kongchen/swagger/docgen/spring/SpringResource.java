@@ -1,11 +1,12 @@
 package com.github.kongchen.swagger.docgen.spring;
 
-import com.github.kongchen.swagger.docgen.util.SpringUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.github.kongchen.swagger.docgen.util.SpringUtils;
 
 /**
  * @author tedleman

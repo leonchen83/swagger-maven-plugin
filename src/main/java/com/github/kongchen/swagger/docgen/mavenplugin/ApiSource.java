@@ -1,21 +1,27 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
+import java.io.File;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.reflections.Reflections;
+import org.springframework.core.annotation.AnnotationUtils;
+
 import com.github.kongchen.swagger.docgen.ResponseMessageOverride;
 import com.google.common.base.Strings;
+
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.models.Contact;
 import io.swagger.models.ExternalDocs;
 import io.swagger.models.Info;
 import io.swagger.models.License;
 import io.swagger.util.BaseReaderUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.reflections.Reflections;
-import org.springframework.core.annotation.AnnotationUtils;
-
-import java.io.File;
-import java.lang.annotation.Annotation;
-import java.util.*;
 
 /**
  * User: kongchen
@@ -136,10 +142,10 @@ public class ApiSource {
 
     @Parameter
     private List<String> modelConverters;
-    
+
     @Parameter
     private boolean skipInheritingClasses = false;
-    
+
     @Parameter
     private String operationIdFormat;
 
@@ -151,14 +157,14 @@ public class ApiSource {
 
     public Set<Class<?>> getValidClasses(Class<? extends Annotation> clazz) {
         Set<Class<?>> classes = new LinkedHashSet<Class<?>>();
-        
+
         List<String> prefixes = new ArrayList<String>();
         if (getLocations() == null) {
             prefixes.add("");
         } else {
             prefixes.addAll(getLocations());
         }
-        
+
         for (String location : prefixes) {
             Set<Class<?>> c = new Reflections(location).getTypesAnnotatedWith(clazz, true);
             classes.addAll(c);

@@ -1,22 +1,19 @@
 package com.github.kongchen.swagger.docgen.reader;
 
-import com.github.kongchen.swagger.docgen.GenerateException;
-import com.github.kongchen.swagger.docgen.spring.SpringResource;
-import io.swagger.models.Swagger;
-import org.apache.maven.monitor.logging.DefaultLog;
-import org.apache.maven.plugin.logging.Log;
-import org.codehaus.plexus.logging.console.ConsoleLogger;
-import org.codehaus.plexus.logging.console.ConsoleLoggerManager;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.testng.annotations.Test;
-import org.codehaus.plexus.logging.Logger;
+import static org.testng.AssertJUnit.assertEquals;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import static org.testng.AssertJUnit.assertEquals;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.testng.annotations.Test;
+
+import com.github.kongchen.swagger.docgen.GenerateException;
+import com.github.kongchen.swagger.docgen.spring.SpringResource;
+
+import io.swagger.models.Swagger;
 
 public class SpringMvcApiReaderTest {
 

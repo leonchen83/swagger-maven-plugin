@@ -1,13 +1,9 @@
 package com.github.kongchen.swagger.docgen.spring;
 
-import com.github.kongchen.swagger.docgen.GenerateException;
-import com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader;
-import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.jaxrs.ext.SwaggerExtension;
-import io.swagger.jaxrs.ext.SwaggerExtensions;
-import io.swagger.models.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +15,19 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.github.kongchen.swagger.docgen.GenerateException;
+import com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader;
+import com.google.common.collect.ImmutableMap;
+
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.jaxrs.ext.SwaggerExtension;
+import io.swagger.jaxrs.ext.SwaggerExtensions;
+import io.swagger.models.HttpMethod;
+import io.swagger.models.Model;
+import io.swagger.models.ModelImpl;
+import io.swagger.models.Response;
+import io.swagger.models.Swagger;
 
 
 public class SpringMVCResponseStatusTest {

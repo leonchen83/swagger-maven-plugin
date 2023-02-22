@@ -1,9 +1,10 @@
 package com.github.kongchen.swagger.docgen.reader;
 
-import com.github.kongchen.swagger.docgen.GenerateException;
-import io.swagger.models.Swagger;
-
 import java.util.Set;
+
+import com.github.kongchen.swagger.docgen.GenerateException;
+
+import io.swagger.models.Swagger;
 
 /**
  * @author chekong on 15/4/28.

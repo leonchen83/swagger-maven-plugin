@@ -16,9 +16,9 @@
 
 package com.wordnik.sample.model;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-@javax.xml.bind.annotation.XmlRootElement
+@jakarta.xml.bind.annotation.XmlRootElement
 public class ApiResponse {
     public static final int ERROR = 1;
     public static final int WARNING = 2;

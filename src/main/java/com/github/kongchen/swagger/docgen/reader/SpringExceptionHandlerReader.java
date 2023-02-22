@@ -1,9 +1,7 @@
 package com.github.kongchen.swagger.docgen.reader;
 
-import org.apache.maven.plugin.logging.Log;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import static org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation;
+import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -12,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.springframework.core.annotation.AnnotatedElementUtils.findMergedAnnotation;
-import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
+import org.apache.maven.plugin.logging.Log;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class SpringExceptionHandlerReader {
     private final Log log;

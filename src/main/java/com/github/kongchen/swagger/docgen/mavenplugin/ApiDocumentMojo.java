@@ -1,8 +1,8 @@
 package com.github.kongchen.swagger.docgen.mavenplugin;
 
-import com.github.kongchen.swagger.docgen.AbstractDocumentSource;
-import com.github.kongchen.swagger.docgen.GenerateException;
-import io.swagger.util.Json;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.List;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -15,11 +15,10 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.github.kongchen.swagger.docgen.AbstractDocumentSource;
+import com.github.kongchen.swagger.docgen.GenerateException;
+
+import io.swagger.util.Json;
 
 /**
  * User: kongchen
@@ -103,13 +102,13 @@ public class ApiDocumentMojo extends AbstractMojo {
 
             if (enabledObjectMapperFeatures!=null) {
                 configureObjectMapperFeatures(enabledObjectMapperFeatures,true);
-                
+
             }
 
             if (disabledObjectMapperFeatures!=null) {
                 configureObjectMapperFeatures(disabledObjectMapperFeatures,false);
             }
-            
+
             for (ApiSource apiSource : apiSources) {
                 validateConfiguration(apiSource);
                 AbstractDocumentSource documentSource = apiSource.isSpringmvc()

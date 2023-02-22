@@ -1,18 +1,11 @@
 package com.github.kongchen.swagger.docgen;
 
-import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
-import com.github.kongchen.swagger.docgen.reader.AbstractReader;
-import com.github.kongchen.swagger.docgen.reader.ClassSwaggerReader;
-import io.swagger.models.ExternalDocs;
-import io.swagger.models.Info;
-import io.swagger.models.Path;
-import io.swagger.models.Swagger;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.net.URI;
@@ -20,9 +13,21 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.when;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.logging.Log;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.github.kongchen.swagger.docgen.mavenplugin.ApiSource;
+import com.github.kongchen.swagger.docgen.reader.AbstractReader;
+import com.github.kongchen.swagger.docgen.reader.ClassSwaggerReader;
+
+import io.swagger.models.ExternalDocs;
+import io.swagger.models.Info;
+import io.swagger.models.Path;
+import io.swagger.models.Swagger;
 
 public class AbstractDocumentSourceTest {
     @Mock

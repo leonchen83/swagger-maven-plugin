@@ -6,6 +6,7 @@
 package com.github.kongchen.swagger.docgen.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.swagger.converter.ModelConverter;
 import io.swagger.jackson.AbstractModelConverter;
 

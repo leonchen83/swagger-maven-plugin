@@ -16,15 +16,15 @@
 
 package com.wordnik.sample.data;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.wordnik.sample.model.Category;
 import com.wordnik.sample.model.Pet;
 import com.wordnik.sample.model.PetId;
 import com.wordnik.sample.model.PetName;
 import com.wordnik.sample.model.Tag;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class PetData {
     static List<Pet> pets = new ArrayList<Pet>();
